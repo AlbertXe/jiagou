@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com</groupId>
+	<artifactId>jiagou</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging> <!-- 默认是jar -->
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+			<scope>provided</scope> <!-- 只需参与编译，无需参与打包，tomcat有 -->
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+	
+	<!-- tomcat8 -->
+	<pluginRepositories>   
+	  <pluginRepository>   
+		<id>alfresco-public</id>    
+		<url>https://artifacts.alfresco.com/nexus/content/groups/public</url>   
+	  </pluginRepository>    
+	  <pluginRepository>   
+		<id>alfresco-public-snapshots</id>    
+		<url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>    
+		<snapshots>   
+		  <enabled>true</enabled>    
+		  <updatePolicy>daily</updatePolicy>   
+		</snapshots>   
+	  </pluginRepository>    
+	  <pluginRepository>   
+		<id>beardedgeeks-releases</id>    
+		<url>http://beardedgeeks.googlecode.com/svn/repository/releases</url>   
+	  </pluginRepository>   
+  </pluginRepositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<skipTests>true</skipTests> <!-- maven打包跳过测试 -->
+				</configuration>
+			</plugin>
+			
+			<!-- <plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+				</configuration>
+			</plugin> -->
+			<plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat8-maven-plugin</artifactId>
+          <version>3.0-r1655215</version>
+          <configuration>
+          	<path>/</path>
+          </configuration>
+        </plugin>
+		</plugins>
+	</build>
+
+</project>
