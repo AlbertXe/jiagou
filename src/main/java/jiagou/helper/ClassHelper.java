@@ -1,5 +1,6 @@
 package jiagou.helper;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,4 +50,29 @@ public final class ClassHelper {
 		return rtn;
 	}
 
+	/**
+	 * 获取包下父类的所有子类
+	 */
+	public static Set<Class<?>> getClassSetBySuper(Class<?> superclass) {
+		Set<Class<?>> rtn = new HashSet<>();
+		for (Class<?> class1 : set) {
+			if (superclass.isAssignableFrom(class1) && !superclass.equals(class1)) {
+				rtn.add(class1);
+			}
+		}
+		return rtn;
+	}
+
+	/**
+	 * 获得带有某注解的所有类
+	 */
+	public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass) {
+		Set<Class<?>> rtn = new HashSet<>();
+		for (Class<?> class1 : set) {
+			if (class1.isAnnotationPresent(annotationClass)) {
+				rtn.add(class1);
+			}
+		}
+		return rtn;
+	}
 }

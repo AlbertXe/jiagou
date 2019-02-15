@@ -22,4 +22,8 @@ public class BeanHelper {
 	public static <T> T getBean(Class<T> cls) {
 		return (T) MAP.get(cls);
 	}
+
+	public static void setBean(Class<?> cls, Object obj) {
+		MAP.put(cls, obj);
+	}
 }

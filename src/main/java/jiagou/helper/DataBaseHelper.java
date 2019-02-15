@@ -153,4 +153,48 @@ public class DataBaseHelper {
 		}
 		return rows;
 	}
+
+	/**
+	 * 开启事物
+	 */
+	public static void beginTransaction() {
+		Connection connection = getConnection();
+		try {
+			connection.setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connHolder.set(connection);
+		}
+	}
+
+	/**
+	 * 提交事物
+	 */
+	public static void commitTransaction() {
+		Connection connection = getConnection();
+		try {
+			connection.commit();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connHolder.remove();
+		}
+	}
+
+	/**
+	 * 回滚事物
+	 */
+	public static void rollbackTransaction() {
+		Connection connection = getConnection();
+		try {
+			connection.rollback();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connHolder.remove();
+		}
+	}
 }
